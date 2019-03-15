@@ -1,0 +1,30 @@
+{
+    "name": "HotCat",
+    "author": "Galobtter",
+    "license-name": "MIT",
+    "APIModules": {
+        "categoryedit": "ApiCategoryEdit"
+    },
+    "Hooks": {
+        "LinksUpdateComplete":[
+            "HotCatHooks::onLinksUpdateComplete"
+        ],
+        "BeforePageDisplay": [
+            "HotCatHooks::onBeforePageDisplay"
+        ]
+    },
+    "AutoloadClasses": {
+        "ApiCategoryEdit": "includes/ApiCategoryEdit.php",
+        "HotCatHooks": "includes/HotCatHooks.php"
+    },
+    "ResourceModules": {
+        "ext.hotcat": {
+            "scripts": "dist/index.js"
+        }
+    },
+    "ResourceFileModulePaths": {
+        "localBasePath": "",
+        "remoteExtPath": "HotCat"
+    },    
+    "manifest_version": 2   
+}
