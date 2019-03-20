@@ -7,6 +7,9 @@ module.exports = {
 		path: path.resolve( __dirname, 'dist' ),
 		filename: 'index.js'
 	},
+	resolve: {
+		modules: [ 'modules' ]
+	},
 	module: {
 		rules: [
 			{
@@ -20,6 +23,15 @@ module.exports = {
 						]
 					}
 				}
+			},
+			{
+				test: /\.less$/,
+				exclude: /node_modules/,
+				use: [
+					'style-loader',
+					'css-loader',
+					'less-loader'
+				]
 			}
 		]
 	}

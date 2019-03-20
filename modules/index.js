@@ -1,12 +1,32 @@
-import getEditableCategories from '../modules/getEditableCategories.js';
+// import getEditableCategories from '../modules/getEditableCategories.js';
+import 'index.less';
 
 /* function initUpload() {
 
 }*/
 
+function modifyCategory() {
+
+}
+
+function removeCategory() {
+
+}
+
 function initPage( $content, Api ) {
-	const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );
-	$content.find( '.mw-normal-catlinks li' ).append( ' (+)' );
+	// const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );
+	Api.get( 'foo' );
+	const catlinks = $content.find( '.mw-normal-catlinks ul' );
+	const newCategoryLink = $( '<li>' ).append( '<a>' ).html( '(+)' );
+	const modifyLink = $( '<a>' ).html( '(±)' ).on( 'click', modifyCategory );
+	const removeLink = $( '<a>' ).html( '(–)' ).on( 'click', removeCategory );
+	const removeModifyLinks = $( '<span>' )
+		.addClass( 'ext-hotcat-removemodify' )
+		.append( modifyLink )
+		.append( removeLink );
+
+	catlinks.after( newCategoryLink );
+	catlinks.find( 'li' ).append( removeModifyLinks );
 }
 
 function setup( specialUpload ) {
@@ -18,13 +38,13 @@ function setup( specialUpload ) {
 		}
 	} );
 
-	// FIXME exclude previews/only on view? allowing editing on preview prolly won't work
-	mw.hook( 'wikipage.categories' ).add( ( $content ) => initPage( $content, Api ) );
-
+	if ( !specialUpload ) {
+		mw.hook( 'wikipage.categories' ).add( ( $content ) => initPage( $content, Api ) );
+	}
 }
 
-( function init() {
-	const namespace = mw.config.get( 'wgNameSpacwgNamespaceNumber' );
+function init() {
+	const namespace = mw.config.get( 'wgNamespaceNumber' );
 	// FIXME don't hardcode namespaces not in core??
 	const allowedNamespace = [
 		-1, // Special
@@ -34,7 +54,7 @@ function setup( specialUpload ) {
 		828, // Module
 		2300, // Gadget
 		2302 // Gadget definition
-	].indexOf( namespace ) !== -1;
+	].indexOf( namespace ) === -1;
 	const specialUpload = ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Upload' );
 
 	// documented difference to previous hotcat- does not load on nonexistant pages
@@ -45,4 +65,6 @@ function setup( specialUpload ) {
 	) {
 		mw.loader.using( [ 'mediawiki.api' ] ).then( () => setup( specialUpload ) );
 	}
-}() );
+}
+
+init();
