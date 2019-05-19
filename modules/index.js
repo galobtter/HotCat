@@ -1,45 +1,19 @@
 // import getEditableCategories from '../modules/getEditableCategories.js';
 import 'index.less';
-
-/* function initUpload() {
-
-}*/
-
-function modifyCategory() {
-
-}
-
-function removeCategory() {
-
-}
-
-function initPage( $content, Api ) {
-	// const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );
-	Api.get( 'foo' );
-	const catlinks = $content.find( '.mw-normal-catlinks ul' );
-	const newCategoryLink = $( '<li>' ).append( '<a>' ).html( '(+)' );
-	const modifyLink = $( '<a>' ).html( '(±)' ).on( 'click', modifyCategory );
-	const removeLink = $( '<a>' ).html( '(–)' ).on( 'click', removeCategory );
-	const removeModifyLinks = $( '<span>' )
-		.addClass( 'ext-hotcat-removemodify' )
-		.append( modifyLink )
-		.append( removeLink );
-
-	catlinks.after( newCategoryLink );
-	catlinks.find( 'li' ).append( removeModifyLinks );
-}
+import UI from 'UI.js';
 
 function setup( specialUpload ) {
-	const Api = new mw.Api( {
+	/* const Api = new mw.Api( {
 		ajax: {
 			headers: {
 				'Api-User-Agent': 'HotCat (mw:Extension:HotCat)'
 			}
 		}
-	} );
-
+	} ); */
+	// const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );
+	const ui = new UI();
 	if ( !specialUpload ) {
-		mw.hook( 'wikipage.categories' ).add( ( $content ) => initPage( $content, Api ) );
+		mw.hook( 'wikipage.categories' ).add( ( $content ) => ui.initPage( $content ) );
 	}
 }
 
