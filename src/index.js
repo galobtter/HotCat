@@ -1,6 +1,17 @@
-// import getEditableCategories from '../modules/getEditableCategories.js';
 import 'index.less';
-import { initPage } from 'UI.js';
+import { initPage } from 'ui/initialPageLinks.js';
+
+/* Consts */
+// FIXME don't hardcode namespaces not in core??
+const DISALLOWED_NAMESPACES = [
+	-1, // Special
+	8, // MediaWiki
+	10, // Template
+	710, // TimedText
+	828, // Module
+	2300, // Gadget
+	2302 // Gadget definition
+];
 
 function setup( specialUpload ) {
 	/* const Api = new mw.Api( {
@@ -18,16 +29,7 @@ function setup( specialUpload ) {
 
 function init() {
 	const namespace = mw.config.get( 'wgNamespaceNumber' );
-	// FIXME don't hardcode namespaces not in core??
-	const allowedNamespace = [
-		-1, // Special
-		8, // MediaWiki
-		10, // Template
-		710, // TimedText
-		828, // Module
-		2300, // Gadget
-		2302 // Gadget definition
-	].indexOf( namespace ) === -1;
+	const allowedNamespace = DISALLOWED_NAMESPACES.indexOf( namespace ) === -1;
 	const specialUpload = ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Upload' );
 
 	// documented difference to previous hotcat - does not load on nonexistant pages
