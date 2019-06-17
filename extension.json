@@ -1,16 +1,21 @@
 {
     "name": "HotCat",
+    "namemsg": "hotcat-extensionname",
     "author": "Galobtter",
     "license-name": "MIT",
+    "descriptionmsg": "hotcat-desc",
     "APIModules": {
         "categoryedit": "ApiCategoryEdit"
     },
     "Hooks": {
-        "LinksUpdateComplete":[
+        "LinksUpdateComplete": [
             "HotCatHooks::onLinksUpdateComplete"
         ],
         "BeforePageDisplay": [
             "HotCatHooks::onBeforePageDisplay"
+        ],
+        "ResourceLoaderGetConfigVars": [
+            "HotCatHooks::onResourceLoaderGetConfigVars"
         ]
     },
     "AutoloadClasses": {
@@ -19,12 +24,15 @@
     },
     "ResourceModules": {
         "ext.hotcat": {
-            "scripts": "dist/index.js"
+            "scripts": "dist/index.js",
+            "dependancies": [
+                "mediawiki.api"
+            ]
         }
     },
     "ResourceFileModulePaths": {
         "localBasePath": "",
         "remoteExtPath": "HotCat"
-    },    
-    "manifest_version": 2   
+    },
+    "manifest_version": 2
 }

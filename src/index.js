@@ -1,6 +1,6 @@
 // import getEditableCategories from '../modules/getEditableCategories.js';
 import 'index.less';
-import UI from 'UI.js';
+import { initPage } from 'UI.js';
 
 function setup( specialUpload ) {
 	/* const Api = new mw.Api( {
@@ -11,9 +11,8 @@ function setup( specialUpload ) {
 		}
 	} ); */
 	// const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );
-	const ui = new UI();
 	if ( !specialUpload ) {
-		mw.hook( 'wikipage.categories' ).add( ( $content ) => ui.initPage( $content ) );
+		mw.hook( 'wikipage.categories' ).add( ( $content ) => initPage( $content ) );
 	}
 }
 
@@ -31,13 +30,13 @@ function init() {
 	].indexOf( namespace ) === -1;
 	const specialUpload = ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Upload' );
 
-	// documented difference to previous hotcat- does not load on nonexistant pages
+	// documented difference to previous hotcat - does not load on nonexistant pages
 	if (
 		mw.config.get( 'wgIsProbablyEditable' ) &&
 		mw.config.get( 'wgArticleId' ) !== 0 &&
 		( allowedNamespace || specialUpload )
 	) {
-		mw.loader.using( [ 'mediawiki.api' ] ).then( () => setup( specialUpload ) );
+		setup( specialUpload );
 	}
 }
 
