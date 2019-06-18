@@ -1,4 +1,8 @@
 {
 	"hotcat-extensionname": "HotCat",
-	"hotcat-desc": "Extension for modifying categories."
+	"hotcat-desc": "Extension for modifying categories.",
+	"hotcat-confirm-title": "Save changes?",
+	"hotcat-confirm-message": "You are making these changes to the page's categories:",
+	"hotcat-confirm-adding": "Adding: $1",
+	"hotcat-confirm-removing": "Removing: $1"
 }

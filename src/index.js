@@ -1,4 +1,3 @@
-import 'index.less';
 import { initPage } from 'ui/initialPageLinks.js';
 
 /* Consts */
@@ -13,33 +12,38 @@ const DISALLOWED_NAMESPACES = [
 	2302 // Gadget definition
 ];
 
-function setup( specialUpload ) {
-	/* const Api = new mw.Api( {
+/*
+export function initSpecialUpload() {
+	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Upload' ) {
+		initSpecialPage();
+	}
+	const Api = new mw.Api( {
 		ajax: {
 			headers: {
 				'Api-User-Agent': 'HotCat (mw:Extension:HotCat)'
 			}
 		}
-	} ); */
-	// const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );
-	if ( !specialUpload ) {
-		mw.hook( 'wikipage.categories' ).add( ( $content ) => initPage( $content ) );
-	}
+	} );
+	const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );
 }
+*/
 
-function init() {
+export function init( $content ) {
 	const namespace = mw.config.get( 'wgNamespaceNumber' );
 	const allowedNamespace = DISALLOWED_NAMESPACES.indexOf( namespace ) === -1;
-	const specialUpload = ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Upload' );
 
 	// documented difference to previous hotcat - does not load on nonexistant pages
 	if (
-		mw.config.get( 'wgIsProbablyEditable' ) &&
-		mw.config.get( 'wgArticleId' ) !== 0 &&
-		( allowedNamespace || specialUpload )
+		mw.config.get( 'wgIsArticle' ) && // Not in edit/history view etc
+		!mw.config.get( 'wgDiffOldId' ) && // Not in diff view
+		mw.config.get( 'wgArticleId' ) !== 0 && // Page exists
+		mw.config.get( 'wgIsProbablyEditable' ) && // Page editable
+		allowedNamespace
 	) {
-		setup( specialUpload );
+		initPage( $content );
 	}
 }
 
-init();
+mw.hook( 'wikipage.categories' ).add( ( $content ) => {
+	init( $content );
+} );

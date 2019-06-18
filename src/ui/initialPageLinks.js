@@ -1,46 +1,59 @@
-export function initPage( $content ) {
-	this.normalLinks = $content.find( '.mw-normal-catlinks' );
-	this.catlist = this.normalLinks.find( 'ul' );
-
-	const multiModifyLink = $( '<a>' )
-		.html( '<span>+<sup>+</sup></span>' )
-	const multiModifyItem = $( '<span>' )
-		.addClass( 'ext-hotcat-multimodify' )
-		.append( '(' )
-		.append( multiModifyLink )
-		.append( ')' );
-
-	const newCategoryLink = $( '<a>' )
-		.html( '(+)' )
-	const newCategoryItem = $( '<li>' )
-		.append( newCategoryLink );
-
-	const modifyLink = $( '<a>' )
-		.html( '(±)' )
-	const removeLink = $( '<a>' )
-		.html( '(–)' )
-	const removeModifyItem = $( '<span>' )
-		.addClass( 'ext-hotcat-removemodify' )
-		.append( modifyLink )
-		.append( removeLink );
-
-	this.normalLinks.children( 'a' ).first().after( multiModifyItem );
-	this.catlist.children().append( removeModifyItem );
-	this.catlist.append( newCategoryItem );
+/**
+ * Construct our own category item for inclu
+ * @param {string} categoryName
+ * @param {boolean} isEditable
+ * @returns {JQuery}
+ */
+function createCategoryItem( categoryName, isEditable ) {
+	const categoryNameWithNS = `Category: ${categoryName}`;
+	const elementTemplate =
+	`
+	<li>
+	<a href="/wiki/${encodeURIComponent( categoryNameWithNS )} title = "${categoryNameWithNS}">
+	${categoryNameWithNS}
+	</a>
+	${isEditable ? `<span class="hotcat-editlinks">
+	<a>(±)</a><a>(–)</a>
+	</span>` : ''}
+	</li>`;
+	return $( $.parseHTML( elementTemplate ) );
 }
 
+/**
+ * Go back to using jquery to create html..yeah, need to preserve components as vars to add click handlers and stuff..
+ * @param {JQuery} $content
+ * @param {Object} categories
+ */
+export function initPage( $content, categories ) {
+	const normalLinks = $content.find( '.mw-normal-catlinks' );
+	const catlist = normalLinks.find( 'ul' );
+
+	const multiModifyTemplate =
+	$( $.parseHTML(
+		`<span class = "hotcat-multimodify">
+		(<a>+<sup>+</sup></a>)
+		</span>`
+	) );
+
+	normalLinks.children( 'a' ).first().after( multiModifyTemplate );
+	catlist.replaceWith( $( 'ul' ).append( elements ) );
+	catlist.append( newCategoryItem );
+}
+
+/*
 loadOOui() {
 	return mw.loader.using( [ 'oojs-ui-core' ] );
 }
 
 multiModify() {
-	this.loadOOui().then( () => {
+	const loadOOui().then( () => {
 		const button = new OO.ui.ButtonWidget( {
 			label: 'Save',
 			title: 'Save',
 			flags: [ 'primary', 'progressive' ],
 			classes: [ 'ext-hotcat-save' ]
 		} );
-		this.normalLinks.children( '.ext-hotcat-multimodify' ).replaceWith( button.$element );
+		const normalLinks.children( '.ext-hotcat-multimodify' ).replaceWith( button.$element );
 	} );
 }
+*/

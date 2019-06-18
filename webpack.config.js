@@ -3,13 +3,13 @@ const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' );
 
 module.exports = {
 	mode: 'development',
-	entry: './modules/index.js',
+	entry: './src/indexGadget.js',
 	output: {
 		path: path.resolve( __dirname, 'dist' ),
 		filename: 'index.js'
 	},
 	resolve: {
-		modules: [ 'modules' ]
+		modules: [ 'src' ]
 	},
 	optimization: {
 		minimizer: [ new UglifyJsPlugin() ]

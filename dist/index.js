@@ -81,19 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./modules/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/indexGadget.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./modules/index.less":
-/*!***********************************************************************************************************!*\
-  !*** ../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./modules/index.less ***!
-  \***********************************************************************************************************/
+/***/ "../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./src/ui/index.less":
+/*!**********************************************************************************************************!*\
+  !*** ../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./src/ui/index.less ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"../node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".ext-hotcat-removemodify,\\n.ext-hotcat-multimodify {\\n  margin-left: 0.3em;\\n}\\n.ext-hotcat-removemodify a + a,\\n.ext-hotcat-multimodify a + a {\\n  margin-left: 0.2em;\\n}\\n.ext-hotcat-save {\\n  font-size: 0.85em;\\n  margin: 0 0 0 0.5em;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./modules/index.less?../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"../node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".hotcat-editlinks,\\n.hotcat-multimodify {\\n  margin-left: 0.3em;\\n}\\n.hotcat-editlinks a + a,\\n.hotcat-multimodify a + a {\\n  margin-left: 0.2em;\\n}\\n.hotcat-save {\\n  font-size: 0.85em;\\n  margin: 0 0 0 0.5em;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./src/ui/index.less?../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./src/ui/initialPageLinks.less":
+/*!*********************************************************************************************************************!*\
+  !*** ../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./src/ui/initialPageLinks.less ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"../node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".hotcat-editlinks,\\n.hotcat-multimodify {\\n  margin-left: 0.3em;\\n}\\n.hotcat-editlinks a + a,\\n.hotcat-multimodify a + a {\\n  margin-left: 0.2em;\\n}\\n.hotcat-save {\\n  font-size: 0.85em;\\n  margin: 0 0 0 0.5em;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./src/ui/initialPageLinks.less?../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -131,38 +142,72 @@ eval("\n/**\n * When source maps are enabled, `style-loader` uses a link element
 
 /***/ }),
 
-/***/ "./modules/UI.js":
-/*!***********************!*\
-  !*** ./modules/UI.js ***!
-  \***********************/
+/***/ "./i18n/en.json":
+/*!**********************!*\
+  !*** ./i18n/en.json ***!
+  \**********************/
+/*! exports provided: hotcat-extensionname, hotcat-desc, hotcat-confirm-title, hotcat-confirm-message, hotcat-confirm-adding, hotcat-confirm-removing, default */
+/***/ (function(module) {
+
+eval("module.exports = {\"hotcat-extensionname\":\"HotCat\",\"hotcat-desc\":\"Extension for modifying categories.\",\"hotcat-confirm-title\":\"Save changes?\",\"hotcat-confirm-message\":\"You are making these changes to the page's categories:\",\"hotcat-confirm-adding\":\"Adding: $1\",\"hotcat-confirm-removing\":\"Removing: $1\"};\n\n//# sourceURL=webpack:///./i18n/en.json?");
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar UI = function () {\n\tfunction UI() {\n\t\t_classCallCheck(this, UI);\n\t}\n\n\t_createClass(UI, [{\n\t\tkey: 'initPage',\n\t\tvalue: function initPage($content) {\n\t\t\tvar _this = this;\n\n\t\t\tthis.normalLinks = $content.find('.mw-normal-catlinks');\n\t\t\tthis.catlist = this.normalLinks.find('ul');\n\n\t\t\tvar multiModifyLink = $('<a>').html('<span>+<sup>+</sup></span>').on('click', function () {\n\t\t\t\treturn _this.multiModify();\n\t\t\t});\n\t\t\tvar multiModifyItem = $('<span>').addClass('ext-hotcat-multimodify').append('(').append(multiModifyLink).append(')');\n\n\t\t\tvar newCategoryLink = $('<a>').html('(+)').on('click', function () {\n\t\t\t\treturn _this.newCategory();\n\t\t\t});\n\t\t\tvar newCategoryItem = $('<li>').append(newCategoryLink);\n\n\t\t\tvar modifyLink = $('<a>').html('(±)').on('click', function () {\n\t\t\t\treturn _this.modifyCategory();\n\t\t\t});\n\t\t\tvar removeLink = $('<a>').html('(–)').on('click', function () {\n\t\t\t\treturn _this.removeCategory();\n\t\t\t});\n\t\t\tvar removeModifyItem = $('<span>').addClass('ext-hotcat-removemodify').append(modifyLink).append(removeLink);\n\n\t\t\tthis.normalLinks.children('a').first().after(multiModifyItem);\n\t\t\tthis.catlist.children().append(removeModifyItem);\n\t\t\tthis.catlist.append(newCategoryItem);\n\t\t}\n\t}, {\n\t\tkey: 'loadOOui',\n\t\tvalue: function loadOOui() {\n\t\t\treturn mw.loader.using(['oojs-ui-core']);\n\t\t}\n\t}, {\n\t\tkey: 'multiModify',\n\t\tvalue: function multiModify() {\n\t\t\tvar _this2 = this;\n\n\t\t\tthis.loadOOui().then(function () {\n\t\t\t\tvar button = new OO.ui.ButtonWidget({\n\t\t\t\t\tlabel: 'Save',\n\t\t\t\t\ttitle: 'Save',\n\t\t\t\t\tflags: ['primary', 'progressive'],\n\t\t\t\t\tclasses: ['ext-hotcat-save']\n\t\t\t\t});\n\t\t\t\t_this2.normalLinks.children('.ext-hotcat-multimodify').replaceWith(button.$element);\n\t\t\t});\n\t\t}\n\t}, {\n\t\tkey: 'newCategory',\n\t\tvalue: function newCategory() {}\n\t}, {\n\t\tkey: 'modifyCategory',\n\t\tvalue: function modifyCategory() {}\n\t}, {\n\t\tkey: 'removeCategory',\n\t\tvalue: function removeCategory() {}\n\t}]);\n\n\treturn UI;\n}();\n\nexports.default = UI;\n\n//# sourceURL=webpack:///./modules/UI.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.init = init;\n\nvar _initialPageLinks = __webpack_require__(/*! ui/initialPageLinks.js */ \"./src/ui/initialPageLinks.js\");\n\n/* Consts */\n// FIXME don't hardcode namespaces not in core??\nvar DISALLOWED_NAMESPACES = [-1, // Special\n8, // MediaWiki\n10, // Template\n710, // TimedText\n828, // Module\n2300, // Gadget\n2302 // Gadget definition\n];\n\n/*\nexport function initSpecialUpload() {\n\tif ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Upload' ) {\n\t\tinitSpecialPage();\n\t}\n\tconst Api = new mw.Api( {\n\t\tajax: {\n\t\t\theaders: {\n\t\t\t\t'Api-User-Agent': 'HotCat (mw:Extension:HotCat)'\n\t\t\t}\n\t\t}\n\t} );\n\tconst editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );\n}\n*/\n\nfunction init($content) {\n\tvar namespace = mw.config.get('wgNamespaceNumber');\n\tvar allowedNamespace = DISALLOWED_NAMESPACES.indexOf(namespace) === -1;\n\n\t// documented difference to previous hotcat - does not load on nonexistant pages\n\tif (mw.config.get('wgIsArticle') && // Not in edit/history view etc\n\t!mw.config.get('wgDiffOldId') && // Not in diff view\n\tmw.config.get('wgArticleId') !== 0 && // Page exists\n\tmw.config.get('wgIsProbablyEditable') && // Page editable\n\tallowedNamespace) {\n\t\t(0, _initialPageLinks.initPage)($content);\n\t}\n}\n\nmw.hook('wikipage.categories').add(function ($content) {\n\tinit($content);\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
-/***/ "./modules/index.js":
-/*!**************************!*\
-  !*** ./modules/index.js ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\n__webpack_require__(/*! index.less */ \"./modules/index.less\");\n\nvar _UI = __webpack_require__(/*! UI.js */ \"./modules/UI.js\");\n\nvar _UI2 = _interopRequireDefault(_UI);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// import getEditableCategories from '../modules/getEditableCategories.js';\nfunction setup(specialUpload) {\n\t/* const Api = new mw.Api( {\n \tajax: {\n \t\theaders: {\n \t\t\t'Api-User-Agent': 'HotCat (mw:Extension:HotCat)'\n \t\t}\n \t}\n } ); */\n\t// const editableCategories = getEditableCategories( Api, mw.config.get( 'wgPageName' ) );\n\tvar ui = new _UI2.default();\n\tif (!specialUpload) {\n\t\tmw.hook('wikipage.categories').add(function ($content) {\n\t\t\treturn ui.initPage($content);\n\t\t});\n\t}\n}\n\nfunction init() {\n\tvar namespace = mw.config.get('wgNamespaceNumber');\n\t// FIXME don't hardcode namespaces not in core??\n\tvar allowedNamespace = [-1, // Special\n\t8, // MediaWiki\n\t10, // Template\n\t710, // TimedText\n\t828, // Module\n\t2300, // Gadget\n\t2302 // Gadget definition\n\t].indexOf(namespace) === -1;\n\tvar specialUpload = mw.config.get('wgCanonicalSpecialPageName') === 'Upload';\n\n\t// documented difference to previous hotcat- does not load on nonexistant pages\n\tif (mw.config.get('wgIsProbablyEditable') && mw.config.get('wgArticleId') !== 0 && (allowedNamespace || specialUpload)) {\n\t\tmw.loader.using(['mediawiki.api']).then(function () {\n\t\t\treturn setup(specialUpload);\n\t\t});\n\t}\n}\n\ninit();\n\n//# sourceURL=webpack:///./modules/index.js?");
-
-/***/ }),
-
-/***/ "./modules/index.less":
+/***/ "./src/indexGadget.js":
 /*!****************************!*\
-  !*** ./modules/index.less ***!
+  !*** ./src/indexGadget.js ***!
   \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/less-loader/dist/cjs.js!./index.less */ \"../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./modules/index.less\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"../node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./modules/index.less?");
+"use strict";
+eval("\n\n__webpack_require__(/*! ui/index.less */ \"./src/ui/index.less\");\n\n__webpack_require__(/*! ui/initialPageLinks.less */ \"./src/ui/initialPageLinks.less\");\n\nvar _index = __webpack_require__(/*! index.js */ \"./src/index.js\");\n\nvar messages = __webpack_require__(/*! ../i18n/en.json */ \"./i18n/en.json\");\nmw.messages.set(messages);\n(0, _index.init)();\n\n//# sourceURL=webpack:///./src/indexGadget.js?");
+
+/***/ }),
+
+/***/ "./src/ui/index.less":
+/*!***************************!*\
+  !*** ./src/ui/index.less ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/less-loader/dist/cjs.js!./index.less */ \"../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./src/ui/index.less\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ \"../node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/ui/index.less?");
+
+/***/ }),
+
+/***/ "./src/ui/initialPageLinks.js":
+/*!************************************!*\
+  !*** ./src/ui/initialPageLinks.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.initPage = initPage;\n/**\n * Construct our own category item for inclu\n * @param {string} categoryName\n * @param {boolean} isEditable\n * @returns {JQuery}\n */\nfunction createCategoryItem(categoryName, isEditable) {\n\tvar categoryNameWithNS = 'Category: ' + categoryName;\n\tvar elementTemplate = '\\n\\t<li>\\n\\t<a href=\"/wiki/' + encodeURIComponent(categoryNameWithNS) + ' title = \"' + categoryNameWithNS + '\">\\n\\t' + categoryNameWithNS + '\\n\\t</a>\\n\\t' + (isEditable ? '<span class=\"hotcat-editlinks\">\\n\\t<a>(\\xB1)</a><a>(\\u2013)</a>\\n\\t</span>' : '') + '\\n\\t</li>';\n\treturn $($.parseHTML(elementTemplate));\n}\n\n/**\n * Go back to using jquery to create html..yeah, need to preserve components as vars to add click handlers and stuff..\n * @param {JQuery} $content\n * @param {Object} categories\n */\nfunction initPage($content, categories) {\n\tvar normalLinks = $content.find('.mw-normal-catlinks');\n\tvar catlist = normalLinks.find('ul');\n\n\tvar multiModifyTemplate = $($.parseHTML('<span class = \"hotcat-multimodify\">\\n\\t\\t(<a>+<sup>+</sup></a>)\\n\\t\\t</span>'));\n\n\tnormalLinks.children('a').first().after(multiModifyTemplate);\n\tcatlist.replaceWith($('ul').append(elements));\n\tcatlist.append(newCategoryItem);\n}\n\n/*\nloadOOui() {\n\treturn mw.loader.using( [ 'oojs-ui-core' ] );\n}\n\nmultiModify() {\n\tconst loadOOui().then( () => {\n\t\tconst button = new OO.ui.ButtonWidget( {\n\t\t\tlabel: 'Save',\n\t\t\ttitle: 'Save',\n\t\t\tflags: [ 'primary', 'progressive' ],\n\t\t\tclasses: [ 'ext-hotcat-save' ]\n\t\t} );\n\t\tconst normalLinks.children( '.ext-hotcat-multimodify' ).replaceWith( button.$element );\n\t} );\n}\n*/\n\n//# sourceURL=webpack:///./src/ui/initialPageLinks.js?");
+
+/***/ }),
+
+/***/ "./src/ui/initialPageLinks.less":
+/*!**************************************!*\
+  !*** ./src/ui/initialPageLinks.less ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/less-loader/dist/cjs.js!./initialPageLinks.less */ \"../node_modules/css-loader/dist/cjs.js!../node_modules/less-loader/dist/cjs.js!./src/ui/initialPageLinks.less\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ \"../node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/ui/initialPageLinks.less?");
 
 /***/ })
 

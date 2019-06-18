@@ -25,8 +25,16 @@
     "ResourceModules": {
         "ext.hotcat": {
             "scripts": "dist/index.js",
+            "styles": "src/ui/index.less",
             "dependancies": [
-                "mediawiki.api"
+                "mediawiki.api",
+                "mediawiki.jqueryMsg"
+            ],
+            "messages": [
+                "hotcat-confirm-title",
+                "hotcat-confirm-message",
+                "hotcat-confirm-adding",
+                "hotcat-confirm-removing"
             ]
         }
     },
