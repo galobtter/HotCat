@@ -22,7 +22,7 @@ function createCategoryItem( categoryName, isEditable ) {
 /**
  * Go back to using jquery to create html..yeah, need to preserve components as vars to add click handlers and stuff..
  * @param {JQuery} $content
- * @param {Object} categories
+ * @param {Object} categories {categoryName: true, categoryName: false} True means it is editable, false means it is not.
  */
 export function initPage( $content, categories ) {
 	const normalLinks = $content.find( '.mw-normal-catlinks' );
