@@ -40,7 +40,7 @@ export function init( $content ) {
 		mw.config.get( 'wgIsProbablyEditable' ) && // Page editable
 		allowedNamespace
 	) {
-		initPage( $content );
+		initPage( $content, categories );
 	}
 }
 
